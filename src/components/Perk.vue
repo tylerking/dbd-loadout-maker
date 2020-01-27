@@ -26,7 +26,7 @@
 
     <br/>
 
-    <select :name="'filter'" v-model="filter" v-if="type == 'Killer'">
+    <select :name="'filter'" v-model="filter" v-if="type == 'killer'">
       <option value="Any" selected>Any</option>
       <option v-for="filter in killerFilters" :value="filter" v-bind:key="filter">{{ filter }}</option>
     </select>
