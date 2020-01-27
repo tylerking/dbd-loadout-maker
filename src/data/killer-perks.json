@@ -17,13 +17,14 @@
         "character": "Clown",
         "desc": "Your vault speed is 5/10/15% faster. Performing a vault action calls upon The Entity to block that vault location for 8/12/16 seconds. Only one vault location may be blocked in this way at any given time. The vault location is blocked only for Survivors.",
         "name": "Bamboozle",
-        "rarity": "Very Rare",
+        "rarity": "Rare",
         "type": "Chase"
     },
     {
         "character": "Cannibal",
         "desc": "A deep bond with The Entity unlocks potential in one's Aura-reading ability. After hooking a Survivor, all other Survivors' Auras are revealed to you for 4 seconds when they are farther than 40 metres from the Hook. Each time a Survivor is hooked for the first time, gain a 25% stack-able bonus to all Bloodpoint gains up to a maximum of 50/75/100%.",
         "name": "Barbecue & Chilli",
+        "rarity": "Very Rare",
         "tier": "S",
         "type": "Aura"
     },
@@ -31,7 +32,7 @@
         "character": "Huntress",
         "desc": "Your lust for a kill is so intense that your connection with The Entity is momentarily lost making you totally unpredictable. The Red Stain disappears after gaining Bloodlust Tier I and stays hidden until you lose Bloodlust. Gain 30/40/50% more Bloodpoints for actions in the Hunter Category.",
         "name": "Beast Of Prey",
-        "rarity": "Very Rare",
+        "rarity": "Rare",
         "type": "Chase"
     },
     {
@@ -73,7 +74,7 @@
         "character": "Plague",
         "desc": "Your prayers invoke a dark power that meddles with the Survivors' chances of survival. 3 Generators located farthest from you are blocked by The Entity for 80/100/120 seconds at the start of the Trial.",
         "name": "Corrupt Intervention",
-        "rarity": "Very Rare",
+        "rarity": "Rare",
         "type": "Penalty"
     },
     {
@@ -101,14 +102,14 @@
         "character": "All",
         "desc": "Unlocks potential in one's Aura-reading ability. Reveals dying Survivors' Auras when standing within 20/28/36 metres.",
         "name": "Deerstalker",
-        "rarity": "Very Rare",
+        "rarity": "Rare",
         "type": "Aura"
     },
     {
         "character": "Legion",
         "desc": "Any time two or more Survivors are working on the same Generator, that Generator's Aura is highlighted in yellow for 8/10/12 seconds.",
         "name": "Discordance",
-        "rarity": "Very Rare",
+        "rarity": "Rare",
         "type": "Aura"
     },
     {
@@ -129,14 +130,14 @@
         "character": "Hillbilly",
         "desc": "You are resilient to pain. You reduce the duration of Pallet Stuns by 40/45/50%.",
         "name": "Enduring",
-        "rarity": "Very Rare",
+        "rarity": "Rare",
         "type": "Chase"
     },
     {
         "character": "Nightmare",
         "desc": "The increased pressure of losing your preys fills you with anger and gives you unsuspected motivation. Each time the Survivors complete repairs on a Generator, Fire Up grows in power. For each Generator completed, gain a stack-able 3/3.5/4% buff to Picking-Up, Dropping, Pallet Breaking, Generator Damaging and Vaulting speeds for the remainder of the Trial.",
         "name": "Fire Up",
-        "rarity": "Very Rare",
+        "rarity": "Rare",
         "type": "Chase"
     },
     {
@@ -157,7 +158,7 @@
         "character": "Pig",
         "desc": "Your ingenious modifications to Hooks prevent tampering and permanent damage. Hooks destroyed by sabotage or sacrifices repair automatically after 30/20/10 seconds. Gain a notification when someone starts sabotaging the Hooks. The automatic repair timer of sabotaged Bear Traps is reduced by 60 seconds.",
         "name": "Hangman's Trick",
-        "rarity": "Very Rare",
+        "rarity": "Rare",
         "type": "Penalty"
     },
     {
@@ -206,14 +207,14 @@
         "character": "All",
         "desc": "A Hex rooting its power on hope. The false hope of Survivors fills you with excitement and strengthens your totems. For each Dull Totem and Hex Totem remaining on the Map gain a Token. Gain 10% more Bloodpoints for actions in the Hunter Category for each Token. Survivors' cleansing speed is reduced by 4/5/6% for each Token. Gain a notification when someone starts working on a Hex Totem.",
         "name": "Hex: Thrill of the Hunt",
-        "rarity": "Very Rare",
+        "rarity": "Rare",
         "type": "Penalty"
     },
     {
         "character": "Ghost Face",
         "desc": "Your keen senses are sharpened in the dark Realm of The Entity. Unlocks potential in one's Aura-reading ability. Any Survivor performing a rushed action within 48 metres from your location will have their Aura revealed to you for 6 seconds. I'm All Ears can only be triggered once every 60/50/40 seconds.",
         "name": "I'm All Ears",
-        "rarity": "Very Rare",
+        "rarity": "Rare",
         "type": "Aura"
     },
     {
@@ -234,7 +235,7 @@
         "character": "All",
         "desc": "Your powerful hold onto the Survivors causes escapes to be nearly impossible. Struggle Effects from a wiggling Survivor are reduced by 75%. Time to wiggle out of your grasp is increased by 4/8/12%.",
         "name": "Iron Grasp",
-        "rarity": "Very Rare",
+        "rarity": "Rare",
         "type": "Penalty"
     },
     {
@@ -248,7 +249,7 @@
         "character": "Cannibal",
         "desc": "The trauma caused by your brutal attacks makes crying for help painfully difficult. Dying Survivors' Auras are not revealed to other Survivors when they are standing outside of a range of 32/24/16 metres.",
         "name": "Knock Out",
-        "rarity": "Very Rare",
+        "rarity": "Rare",
         "type": "Hunt"
     },
     {
@@ -311,7 +312,7 @@
         "character": "Doctor",
         "desc": "Your presence alone instils great fear. Survivors within your Terror Radius suffer from inefficiency. Affected Survivors' Item Consumption rates are increased by 80/90/100%.",
         "name": "Overwhelming Presence",
-        "rarity": "Very Rare",
+        "rarity": "Rare",
         "type": "Penalty"
     },
     {
@@ -332,7 +333,7 @@
         "character": "Wraith",
         "desc": "Your acute tracking ability allows you to hone in on disturbances left by running Survivors. Scratch Marks left by Survivors will spawn slightly/moderately/considerably closer together.",
         "name": "Predator",
-        "rarity": "Very Rare",
+        "rarity": "Rare",
         "type": "Hunt"
     },
     {
@@ -367,7 +368,7 @@
         "character": "All",
         "desc": "You know where to hit to make them bleed. Wounds inflicted by successful attacks slightly/moderately/considerably increase the Survivor's bleeding frequency and cause the Mangled Status Effect.",
         "name": "Sloppy Butcher",
-        "rarity": "Very Rare",
+        "rarity": "Rare",
         "type": "Penalty"
     },
     {
@@ -381,21 +382,21 @@
         "character": "Spirit",
         "desc": "Each Pallet you break magnifies the wrath of The Entity. After breaking 4/3/2 Pallets, the next time you are stunned by a Pallet, The Entity will instantly break it. You still suffer from the stun effect penalty.",
         "name": "Spirit Fury",
-        "rarity": "Very Rare",
+        "rarity": "Rare",
         "type": "Chase"
     },
     {
         "character": "Nurse",
         "desc": "You are acutely sensitive to the breathing of your prey. Survivors' Grunts of Pain are 25/50/50% louder and regular breathing is 0/0/25% louder.",
         "name": "Stridor",
-        "rarity": "Very Rare",
+        "rarity": "Rare",
         "type": "Hunt"
     },
     {
         "character": "Demogorgon",
         "desc": "Your eerie presence charges the air and interferes with technology. Putting a Survivor into the Dying State with a Basic Attack causes all Generators within a radius of 32 metres to instantly explode and regress. Surge applies an immediate Regression penalty of 8%. Surge can only be triggered once every 60/50/40 seconds.",
         "name": "Surge",
-        "rarity": "Very Rare",
+        "rarity": "Rare",
         "type": "Penalty"
     },
     {
@@ -437,7 +438,7 @@
         "character": "Trapper",
         "desc": "Your presence alone instils great fear. Survivors within your Terror Radius have a 10% greater chance of triggering Skill Checks when repairing, healing or sabotaging. Triggered Skill Checks' success zones are reduced by 40/50/60%.",
         "name": "Unnerving Presence",
-        "rarity": "Very Rare",
+        "rarity": "Rare",
         "type": "Terror"
     },
     {
@@ -458,7 +459,7 @@
         "character": "Oni",
         "desc": "Unlocks potential in one's Aura-reading ability. You are mentally alert and aware of key points on the battlefield. The Auras of all Pallets and Windows are revealed to you within a range of 24 metres.When a Survivor is damaged, Zanshin Tactics becomes inactive for 40/35/30 seconds.",
         "name": "Zanshin Tactics",
-        "rarity": "Very Rare",
+        "rarity": "Rare",
         "type": "Aura"
     }
 ]

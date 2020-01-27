@@ -54,7 +54,6 @@ export default {
     return {
       perks: this.perk,
       perkType: this.type,
-      filtered: [],
       perkActive: false,
       chosenPerk: {},
       filter: 'Any',
@@ -95,19 +94,20 @@ export default {
     },
     randomPerk () {
       if (this.lockPerk !== true) {
-        this.perkActive = true
         if (this.filter == 'Any') {
           this.chosenPerk = this.perks[Math.floor(Math.random() * this.perks.length)];
         } else {
           this.perks = this.perks.filter(perk => perk.type == this.filter)
           this.chosenPerk = this.perks[Math.floor(Math.random() * this.perks.length)];
         }
+        this.perkActive = true
         this.filter = this.chosenPerk.type
         this.perks = this.perk
       } 
     },
     resetPerk () {
       if (this.lockPerk !== true) {
+        this.perks = this.perk
         this.lockPerk = false
         this.perkActive = false
         this.chosenPerk = {}
