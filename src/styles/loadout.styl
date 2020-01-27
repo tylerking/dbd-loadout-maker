@@ -1,0 +1,73 @@
+.loadout
+  display flex
+  flex-wrap wrap
+  justify-content space-between
+  .loadout-perk
+    position relative
+    text-align center
+    @media (max-width: 663px)
+      width 50%
+    .frame
+      background-color grey
+      border 3px solid charcoal
+      height 100px
+      margin 25px
+      overflow hidden
+      position relative
+      width 100px
+      -ms-transform rotate(-45deg)
+      -webkit-transform rotate(-45deg)
+      transform rotate(-45deg)
+      &:hover
+        border-color white
+        cursor pointer
+      &.rare
+        background-color green 
+      &.very-rare
+        background-color purple
+      img
+        width 150px
+        margin:-25px
+        -ms-transform rotate(45deg)
+        -webkit-transform rotate(45deg)
+        transform rotate(45deg)
+      i
+        display table-cell
+        left 40px;
+        position relative;
+        top 40px;
+        -ms-transform rotate(45deg)
+        -webkit-transform rotate(45deg)
+        transform rotate(45deg)
+  select 
+    margin-top 10px
+
+.loadout-perk-list
+  background-color red
+  padding 10px
+  width 300px
+  ul
+    display flex
+    flex-wrap wrap
+    justify-content space-between
+    li
+      border 1px solid white
+      margin-bottom 5px
+      padding 5px
+      &:hover
+        cursor pointer
+        
+.perk-info
+  background-color black
+  color white
+  text-align left
+  width 300px
+  z-index 9999
+  .perk-info-header
+    padding 10px
+    &.rare
+      background-color green 
+    &.very-rare
+      background-color purple
+  .perk-info-desc
+    padding 10px
