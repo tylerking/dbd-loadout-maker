@@ -5,11 +5,7 @@ export const root = style({
   display: 'flex',
   flexDirection: 'column',
   gap: vars.space.lg,
-  background: '#222',
   padding: vars.space.xl,
-  borderRadius: '12px',
-  boxShadow: vars.shadow.lg,
-  border: '1px solid #333'
 });
 
 export const header = style({
@@ -47,8 +43,6 @@ export const grid = style({
   alignItems: 'flex-start',
   flexWrap: 'wrap',
   gap: vars.space.xl,
-  padding: vars.space.md,
-  background: '#111',
-  borderRadius: '8px',
+  padding: vars.space.xl,
   minHeight: '200px'
 });

@@ -11,16 +11,16 @@ const [themeClass, vars] = createTheme({
     surface: tokens.colors.surface,
     text: tokens.colors.text,
     textMuted: tokens.colors.textMuted,
-    rarity: {
-      common: tokens.colors.rarity.common,
-      uncommon: tokens.colors.rarity.uncommon,
-      rare: tokens.colors.rarity.rare,
-      veryRare: tokens.colors.rarity.veryRare,
-      ultraRare: tokens.colors.rarity.ultraRare
+    side: {
+      killer: tokens.colors.side.killer,
+      survivor: tokens.colors.side.survivor
     }
   },
   space: tokens.spacing,
-  font: tokens.fonts,
+  font: {
+    heading: tokens.fonts.heading,
+    body: tokens.fonts.body
+  },
   shadow: tokens.shadows
 });
 

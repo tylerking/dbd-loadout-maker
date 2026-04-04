@@ -1,6 +1,6 @@
 export default {
   colors: {
-    primary: '#4a90e2',
+    primary: '#c8102e',
     secondary: '#f39c12',
     danger: '#e74c3c',
     success: '#2ecc71',
@@ -8,13 +8,10 @@ export default {
     surface: '#2c2c2c',
     text: '#f5f5f5',
     textMuted: '#999',
-    rarity: {
-      common: '#7a7a7a',
-      uncommon: '#128312',
-      rare: '#1a4e8a',
-      veryRare: '#8a1a8a',
-      ultraRare: '#8a6e1a'
-    }
+    side: {
+      killer: '#c8102e',
+      survivor: '#2f9cd6',
+    },
   },
   spacing: {
     xs: '4px',
@@ -24,7 +21,8 @@ export default {
     xl: '32px'
   },
   fonts: {
-    base: 'system-ui, -apple-system, sans-serif'
+    heading: "'Roboto Condensed', sans-serif",
+    body: "'Roboto', sans-serif"
   },
   shadows: {
     sm: '0 2px 4px rgba(0,0,0,0.1)',

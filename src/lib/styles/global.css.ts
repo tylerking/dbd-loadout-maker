@@ -6,7 +6,7 @@ globalStyle('html, body', {
   padding: 0,
   backgroundColor: vars.color.background,
   color: vars.color.text,
-  fontFamily: vars.font.base,
+  fontFamily: vars.font.body,
   minHeight: '100vh'
 });
 
@@ -16,7 +16,8 @@ globalStyle('*', {
 
 globalStyle('h1, h2, h3, h4, h5, h6', {
   margin: 0,
-  color: vars.color.primary
+  color: vars.color.primary,
+  fontFamily: vars.font.heading
 });
 
 globalStyle('a', {

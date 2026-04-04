@@ -1,5 +1,7 @@
 import { createSchema, createYoga } from 'graphql-yoga';
-import { killerPerks, survivorPerks, allPerks } from '../../lib/data/perks';
+import { killerPerks, survivorPerks } from '../../lib/data/perks';
+
+const allPerks = [...killerPerks, ...survivorPerks];
 
 const typeDefs = `
   enum PerkSide {
@@ -7,20 +9,11 @@ const typeDefs = `
     Survivor
   }
 
-  enum PerkRarity {
-    Common
-    Uncommon
-    Rare
-    VeryRare
-    UltraRare
-  }
-
   type Perk {
     id: ID!
     name: String!
     description: String!
     character: String!
-    rarity: String!
     categories: [String!]!
     side: String!
     imageUrl: String!
@@ -30,8 +23,7 @@ const typeDefs = `
     perks(
       side: PerkSide, 
       categories: [String!], 
-      search: String,
-      rarities: [String!]
+      search: String
     ): [Perk!]!
     perk(id: ID!): Perk
     categories(side: PerkSide): [String!]!
@@ -40,7 +32,7 @@ const typeDefs = `
 
 const resolvers = {
   Query: {
-    perks: (_: any, { side, categories, search, rarities }: { side?: string; categories?: string[]; search?: string; rarities?: string[] }) => {
+    perks: (_: any, { side, categories, search }: { side?: string; categories?: string[]; search?: string }) => {
       let filtered = [...allPerks];
       
       if (side) {
@@ -52,27 +44,21 @@ const resolvers = {
           categories.every(cat => p.categories.includes(cat as any))
         );
       }
-
-      if (rarities && rarities.length > 0) {
-        filtered = filtered.filter(p => rarities.includes(p.rarity));
-      }
       
       if (search) {
         const s = search.toLowerCase();
         filtered = filtered.filter(p => 
           p.name.toLowerCase().includes(s) || 
-          p.description.toLowerCase().includes(s) ||
-          p.character.toLowerCase().includes(s)
+          p.character.toLowerCase().includes(s) ||
+          p.description.toLowerCase().includes(s)
         );
       }
       
       return filtered;
     },
-    perk: (_: any, { id }: { id: string }) => {
-      return allPerks.find(p => p.id === id);
-    },
+    perk: (_: any, { id }: { id: string }) => allPerks.find(p => p.id === id),
     categories: (_: any, { side }: { side?: string }) => {
-      const perks = side ? (side === 'Killer' ? killerPerks : survivorPerks) : allPerks;
+      const perks = side ? allPerks.filter(p => p.side === side) : allPerks;
       const cats = new Set<string>();
       perks.forEach(p => p.categories.forEach(c => cats.add(c)));
       return Array.from(cats).sort();
@@ -80,25 +66,30 @@ const resolvers = {
   }
 };
 
+const schema = createSchema({
+  typeDefs,
+  resolvers,
+});
+
 const yoga = createYoga({
-  schema: createSchema({
-    typeDefs,
-    resolvers
-  }),
+  schema,
   graphqlEndpoint: '/api/graphql',
   fetchAPI: { Response }
 });
 
 export default defineEventHandler(async (event) => {
-  const { req, res } = event.node;
-  const response = await yoga.handleNodeRequest(req, res);
+  const body = await readBody(event);
+  const url = getRequestURL(event);
   
-  response.headers.forEach((value, key) => {
-    res.setHeader(key, value);
-  });
-  
-  res.statusCode = response.status;
-  res.statusMessage = response.statusText;
-
-  return response.body;
+  const response = await yoga.fetch(
+    new Request(url, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    }),
+    { event }
+  );
+  return response.json();
 });

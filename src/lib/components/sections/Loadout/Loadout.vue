@@ -20,7 +20,6 @@ const { data, pending, error } = await useFetch('/api/graphql', {
           name
           description
           character
-          rarity
           categories
           side
           imageUrl
@@ -59,14 +58,14 @@ const takeShot = async () => {
   if (import.meta.server || !captureRef.value) return;
   
   try {
-    const domtoimage = await import('dom-to-image-more').then(m => m.default || m);
-    const dataUrl = await domtoimage.toPng(captureRef.value, { height: 160 });
+    const { toPng } = await import('html-to-image');
+    const dataUrl = await toPng(captureRef.value, { height: 160 });
     const link = document.createElement('a');
     link.download = `${props.type.toLowerCase()}-loadout.png`;
     link.href = dataUrl;
     link.click();
   } catch (error) {
-    console.error('domtoimage error: ', error);
+    console.error('html-to-image error: ', error);
   }
 };
 </script>

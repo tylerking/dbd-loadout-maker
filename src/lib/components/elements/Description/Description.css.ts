@@ -16,12 +16,6 @@ export const header = style({
   borderBottom: `2px solid ${vars.color.background}`
 });
 
-export const common = style({ backgroundColor: vars.color.rarity.common });
-export const uncommon = style({ backgroundColor: vars.color.rarity.uncommon });
-export const rare = style({ backgroundColor: vars.color.rarity.rare });
-export const veryRare = style({ backgroundColor: vars.color.rarity.veryRare });
-export const ultraRare = style({ backgroundColor: vars.color.rarity.ultraRare });
-
 export const title = style({
   fontSize: '1rem',
   fontWeight: 'bold',

@@ -15,18 +15,7 @@ const filter = ref<string>('Any');
 const isLocked = ref(false);
 const showSearch = ref(false);
 const searchQuery = ref('');
-
-const rarityClass = computed(() => {
-  if (!chosenPerk.value) return '';
-  switch (chosenPerk.value.rarity) {
-    case 'Common': return styles.common;
-    case 'Uncommon': return styles.uncommon;
-    case 'Rare': return styles.rare;
-    case 'Very Rare': return styles.veryRare;
-    case 'Ultra Rare': return styles.ultraRare;
-    default: return '';
-  }
-});
+const showPopover = ref(false);
 
 const availableCategories = computed(() => {
   const cats = new Set<string>();
@@ -94,9 +83,18 @@ defineExpose({
 
 <template>
   <div :class="styles.root">
-    <div :class="[styles.frame, rarityClass]" @click="toggleSearch">
+    <button
+      type="button"
+      :class="styles.frame"
+      @click="toggleSearch"
+      @mouseenter="showPopover = true"
+      @mouseleave="showPopover = false"
+      @focus="showPopover = true"
+      @blur="showPopover = false"
+      aria-label="Select Perk"
+    >
       <template v-if="chosenPerk">
-        <img :src="chosenPerk.imageUrl" :alt="chosenPerk.name" :class="styles.image" />
+        <img :src="chosenPerk.imageUrl" :alt="chosenPerk.name" :class="styles.image" loading="lazy" />
       </template>
       <template v-else>
         <div :class="styles.placeholder">
@@ -107,9 +105,9 @@ defineExpose({
       <div v-if="isLocked" :class="styles.lockOverlay">
         <Icon name="lock" :size="32" color="currentColor" />
       </div>
-    </div>
+    </button>
 
-    <div v-if="chosenPerk && !showSearch" :class="styles.popover">
+    <div v-if="chosenPerk && !showSearch && showPopover" :class="styles.popover">
       <Description :perk="chosenPerk" />
     </div>
 
@@ -122,21 +120,29 @@ defineExpose({
           @click.stop
           autofocus
         />
-        <Icon name="x" :size="20" :class="styles.closeIcon" @click.stop="toggleSearch" />
+        <button
+          type="button"
+          :class="styles.closeIcon"
+          @click.stop="toggleSearch"
+          aria-label="Close search"
+        >
+          <Icon name="x" :size="20" />
+        </button>
       </div>
       <div :class="styles.searchList">
-        <div 
+        <button
           v-for="perk in filteredPerks" 
           :key="perk.id" 
           :class="styles.searchItem"
           @click.stop="selectPerk(perk)"
+          type="button"
         >
-          <img :src="perk.imageUrl" :alt="perk.name" :class="styles.searchItemImage" />
+          <img :src="perk.imageUrl" :alt="perk.name" :class="styles.searchItemImage" loading="lazy" />
           <div :class="styles.searchItemInfo">
             <div :class="styles.searchItemName">{{ perk.name }}</div>
             <div :class="styles.searchItemCharacter">{{ perk.character }}</div>
           </div>
-        </div>
+        </button>
         <div v-if="filteredPerks.length === 0" :class="styles.noResults">
           No perks found
         </div>
@@ -144,15 +150,32 @@ defineExpose({
     </div>
 
     <div :class="styles.controls">
-      <Icon name="shuffle" :size="18" :class="[styles.icon, isLocked && styles.disabledIcon]" title="Randomize" @click="randomPerk" />
-      <Icon name="rotate-ccw" :size="18" :class="[styles.icon, isLocked && styles.disabledIcon]" title="Reset" @click="resetPerk" />
-      <Icon 
-        :name="isLocked ? 'lock' : 'unlock'" 
-        :size="18" 
-        :class="[styles.icon, isLocked ? styles.lockedIcon : '']" 
+      <button
+        type="button"
+        :class="[styles.icon, isLocked && styles.disabledIcon]"
+        title="Randomize"
+        @click="randomPerk"
+        :disabled="isLocked"
+      >
+        <Icon name="shuffle" :size="18" />
+      </button>
+      <button
+        type="button"
+        :class="[styles.icon, isLocked && styles.disabledIcon]"
+        title="Reset"
+        @click="resetPerk"
+        :disabled="isLocked"
+      >
+        <Icon name="rotate-ccw" :size="18" />
+      </button>
+      <button
+        type="button"
+        :class="[styles.icon, isLocked ? styles.lockedIcon : '']"
         :title="isLocked ? 'Unlock' : 'Lock'"
-        @click="toggleLock" 
-      />
+        @click="toggleLock"
+      >
+        <Icon :name="isLocked ? 'lock' : 'unlock'" :size="18" />
+      </button>
     </div>
 
     <select v-model="filter" :class="styles.filterSelect" :disabled="isLocked">
