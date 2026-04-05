@@ -11,9 +11,19 @@ const [themeClass, vars] = createTheme({
     surface: tokens.colors.surface,
     text: tokens.colors.text,
     textMuted: tokens.colors.textMuted,
+    grayDark: tokens.colors.grayDark,
+    grayDeep: tokens.colors.grayDeep,
     side: {
-      killer: tokens.colors.side.killer,
-      survivor: tokens.colors.side.survivor
+      killer: {
+        primary: tokens.colors.side.killer.primary,
+        secondary: tokens.colors.side.killer.secondary,
+        dark: tokens.colors.side.killer.dark
+      },
+      survivor: {
+        primary: tokens.colors.side.survivor.primary,
+        secondary: tokens.colors.side.survivor.secondary,
+        dark: tokens.colors.side.survivor.dark
+      }
     }
   },
   space: tokens.spacing,

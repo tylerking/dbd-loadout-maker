@@ -8,7 +8,7 @@ This project is a fully modernized version of the original DBD Loadout Maker, po
 - **TypeScript**: Full type safety across the entire application, including the perk data and components.
 - **GraphQL Perk API**: A custom GraphQL endpoint built with `graphql-yoga` and Nitro, serving robust perk data.
 - **Vanilla Extract Styling**: Modern, type-safe CSS-in-JS styling with a tokens-based theme system.
-- **Improved Data Model**: Perks now have robust categorization (Aura, Haste, Gen Speed, etc.) and better metadata.
+- **Improved Data Model**: Perks now have robust categorization (Aura, Haste, Repair, etc.) and better metadata.
 - **Unit & E2E Testing**: Integrated **Playwright** for comprehensive end-to-end testing of features like randomization and locking.
 - **Clean Architecture**: Organized under a `lib` folder for better maintainability and separation of concerns.
 

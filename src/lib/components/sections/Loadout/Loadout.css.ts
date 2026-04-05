@@ -4,45 +4,83 @@ import { vars } from '../../../styles/theme.css.ts';
 export const root = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: vars.space.lg,
-  padding: vars.space.xl,
+  gap: 0,
+  padding: 0,
 });
 
 export const header = style({
   display: 'flex',
-  justifyContent: 'space-between',
+  justifyContent: 'center',
   alignItems: 'center',
-  marginBottom: vars.space.md
+  margin: '0.5rem 0',
+  gap: '1rem'
 });
 
-export const title = style({
-  fontSize: '1.8rem',
-  fontWeight: 'bold',
+export const filterContainer = style({
+  display: 'flex',
+  justifyContent: 'center'
+});
+
+export const globalFilterSelect = style({
+  background: '#000',
+  color: '#fff',
+  padding: '6px 12px',
+  fontSize: '0.8rem',
+  fontFamily: vars.font.heading,
+  width: '180px',
+  cursor: 'pointer',
+  transition: 'all 0.2s ease',
+  textTransform: 'uppercase',
   letterSpacing: '1px',
-  textTransform: 'uppercase'
+  textAlign: 'center',
+  appearance: 'none',
+  border: 'none',
+  ':hover': {
+    backgroundColor: '#111'
+  },
+  ':focus': {
+    outline: 'none',
+  }
 });
 
 export const actions = style({
   display: 'flex',
-  gap: vars.space.md
+  gap: '0.75rem',
+  padding: '4px 12px',
+  backgroundColor: '#000',
+  boxShadow: '0 5px 15px rgba(0,0,0,0.5)',
 });
 
 export const icon = style({
   cursor: 'pointer',
-  color: vars.color.textMuted,
-  transition: 'color 0.2s, transform 0.2s',
+  color: '#fff',
+  transition: 'all 0.2s ease',
+  padding: '4px',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
   ':hover': {
-    color: vars.color.primary,
-    transform: 'scale(1.1)'
+    transform: 'scale(1.1)',
+  },
+  ':active': {
+    transform: 'scale(0.95)',
   }
 });
 
 export const grid = style({
-  display: 'flex',
-  justifyContent: 'space-around',
-  alignItems: 'flex-start',
-  flexWrap: 'wrap',
-  gap: vars.space.xl,
-  padding: vars.space.xl,
-  minHeight: '200px'
+  display: 'grid',
+  gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+  justifyItems: 'center',
+  alignItems: 'start',
+  gap: '2rem',
+  padding: '2rem 1rem',
+  maxWidth: '1200px',
+  margin: '0 auto',
+  width: '100%',
+  '@media': {
+    'screen and (min-width: 1024px)': {
+      gridTemplateColumns: 'repeat(4, 1fr)',
+      gap: vars.space.xl,
+    }
+  }
 });

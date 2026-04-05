@@ -24,52 +24,41 @@ export const root = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  gap: vars.space.sm,
-  flex: '1 0 120px',
-  minWidth: '120px',
-  maxWidth: '180px',
+  gap: '1.5rem',
+  width: '100%',
 });
 
 export const frame = style([baseButton, {
-  width: '100px',
-  height: '100px',
+  width: '120px',
+  height: '120px',
   transform: 'rotate(45deg)',
-  border: '0.5px solid transparent',
   overflow: 'visible',
-  transition: 'transform 0.2s, border-color 0.2s',
+  transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
   position: 'relative',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  background: 'rgba(0,0,0,0.6)',
+  backgroundColor: 'rgba(0, 0, 0, 0.05)',
+  backgroundImage: `
+    linear-gradient(to right, #fff 12px, transparent 12px),
+    linear-gradient(to bottom, #fff 12px, transparent 12px),
+    linear-gradient(to left, #fff 12px, transparent 12px),
+    linear-gradient(to bottom, #fff 12px, transparent 12px),
+    linear-gradient(to left, #fff 12px, transparent 12px),
+    linear-gradient(to top, #fff 12px, transparent 12px),
+    linear-gradient(to right, #fff 12px, transparent 12px),
+    linear-gradient(to top, #fff 12px, transparent 12px)
+  `,
+  backgroundPosition: '0 0, 0 0, 100% 0, 100% 0, 100% 100%, 100% 100%, 0 100%, 0 100%',
+  backgroundSize: '100% 2px, 2px 100%, 100% 2px, 2px 100%, 100% 2px, 2px 100%, 100% 2px, 2px 100%',
+  backgroundRepeat: 'no-repeat',
+  border: 'none',
   ':hover': {
-    transform: 'rotate(45deg) scale(1.05)',
-    borderColor: vars.color.primary
+    transform: 'rotate(45deg) scale(1.1)',
+    backgroundColor: 'rgba(0, 0, 0, 0.1)',
   },
   ':focus': {
-    outline: `2px solid ${vars.color.primary}`,
-    outlineOffset: '8px'
-  },
-  '::before': {
-    content: "''",
-    position: 'absolute',
-    top: '-4px',
-    left: '-4px',
-    right: '-4px',
-    bottom: '-4px',
-    background: `
-      linear-gradient(white, white) 0 0 / 15px 2px,
-      linear-gradient(white, white) 0 0 / 2px 15px,
-      linear-gradient(white, white) 100% 0 / 15px 2px,
-      linear-gradient(white, white) 100% 0 / 2px 15px,
-      linear-gradient(white, white) 100% 100% / 15px 2px,
-      linear-gradient(white, white) 100% 100% / 2px 15px,
-      linear-gradient(white, white) 0 100% / 15px 2px,
-      linear-gradient(white, white) 0 100% / 2px 15px
-    `,
-    backgroundRepeat: 'no-repeat',
-    zIndex: 2,
-    pointerEvents: 'none'
+    outline: 'none',
   }
 }]);
 
@@ -88,61 +77,75 @@ export const placeholder = style({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  color: vars.color.textMuted,
-  fontSize: '2rem',
   transform: 'rotate(-45deg)',
   zIndex: 1
 });
 
 export const popover = style({
   position: 'absolute',
-  top: '0',
-  left: '110%',
-  width: '250px',
+  top: '-10px',
+  left: '125%',
   zIndex: 1000,
+  pointerEvents: 'none',
   '@media': {
+    'screen and (max-width: 1024px)': {
+      left: 'auto',
+      right: '125%',
+    },
     'screen and (max-width: 768px)': {
       left: '50%',
+      right: 'auto',
       transform: 'translateX(-50%)',
-      top: '110%',
+      top: '125%',
     }
   }
 });
 
 export const controls = style({
   display: 'flex',
-  gap: vars.space.sm,
-  marginTop: vars.space.xs
+  gap: '1rem',
+  marginTop: '0.5rem'
 });
 
 export const icon = style([baseButton, {
-  color: vars.color.text,
+  color: '#666',
   fontSize: '20px',
-  transition: 'color 0.2s',
+  transition: 'all 0.2s ease',
+  padding: '6px',
+  backgroundColor: 'rgba(255,255,255,0.03)',
   ':hover': {
-    color: vars.color.primary
-  },
-  ':focus': {
-    outline: `1px solid ${vars.color.primary}`
+    color: vars.color.text,
+    backgroundColor: 'rgba(255,255,255,0.1)'
   }
 }]);
 
 export const lockedIcon = style({
-  color: vars.color.secondary
+  color: vars.color.side.killer.primary,
+  backgroundColor: 'rgba(170, 26, 24, 0.1)'
 });
 
 export const filterSelect = style({
-  background: '#222',
-  color: vars.color.text,
-  border: '1px solid #444',
-  borderRadius: '4px',
-  padding: '2px 4px',
-  fontSize: '0.7rem',
-  width: '100%',
+  background: '#111',
+  color: '#888',
+  border: 'none',
+  padding: '8px 12px',
+  fontSize: '0.8rem',
+  fontFamily: vars.font.heading,
+  width: '160px',
+  margin: '0 auto',
   cursor: 'pointer',
+  transition: 'all 0.2s ease',
+  textTransform: 'uppercase',
+  letterSpacing: '0.05em',
+  appearance: 'none',
+  textAlign: 'center',
+  ':hover': {
+    color: '#aaa',
+    backgroundColor: '#181818'
+  },
   ':focus': {
     outline: 'none',
-    borderColor: vars.color.primary
+    color: vars.color.text
   }
 });
 
@@ -152,14 +155,14 @@ export const lockOverlay = style({
   left: 0,
   width: '100%',
   height: '100%',
-  background: 'rgba(0,0,0,0.4)',
+  background: 'rgba(0,0,0,0.5)',
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  color: vars.color.secondary,
-  fontSize: '1.5rem',
+  color: vars.color.side.killer.primary,
   zIndex: 10,
-  pointerEvents: 'none'
+  pointerEvents: 'none',
+  transform: 'rotate(-45deg)'
 });
 
 export const searchModal = style({
@@ -170,77 +173,73 @@ export const searchModal = style({
   width: '90vw',
   maxWidth: '500px',
   maxHeight: '80vh',
-  background: '#222',
-  border: '2px solid #444',
-  borderRadius: '8px',
+  background: '#121212',
+  boxShadow: '0 20px 50px rgba(0,0,0,0.9)',
   zIndex: 2000,
-  boxShadow: vars.shadow.lg,
   display: 'flex',
   flexDirection: 'column',
   animation: `${jackInTheBox} 0.3s ease-out`,
-  '@media': {
-    'screen and (min-width: 768px)': {
-      width: '400px',
-    }
-  }
+  fontFamily: vars.font.body,
+  border: 'none'
 });
 
 export const searchHeader = style({
-  padding: vars.space.md,
-  borderBottom: '1px solid #333',
+  padding: '1.5rem',
   display: 'flex',
   alignItems: 'center',
-  gap: vars.space.md
+  gap: '1rem',
+  backgroundColor: '#181818'
 });
 
 export const searchInput = style({
   flex: 1,
-  background: '#111',
-  border: '1px solid #444',
+  background: '#0a0a0a',
+  border: 'none',
   color: vars.color.text,
-  padding: vars.space.sm,
-  borderRadius: '4px',
+  padding: '0.8rem 1rem',
+  fontSize: '1rem',
+  fontFamily: vars.font.body,
   ':focus': {
-    outline: 'none',
-    borderColor: vars.color.primary
+    outline: 'none'
   }
 });
 
 export const closeIcon = style([baseButton, {
-  color: vars.color.textMuted,
-  ':hover': { color: vars.color.danger }
+  color: '#555',
+  transition: 'color 0.2s',
+  ':hover': { color: vars.color.side.killer.primary }
 }]);
 
 export const searchList = style({
   flex: 1,
   overflowY: 'auto',
-  padding: vars.space.sm,
+  padding: '1rem',
   display: 'flex',
   flexDirection: 'column',
-  gap: '2px'
+  gap: '4px',
+  backgroundColor: '#121212'
 });
 
 export const searchItem = style([baseButton, {
   display: 'flex',
   alignItems: 'center',
-  padding: vars.space.sm,
-  gap: vars.space.md,
-  borderRadius: '4px',
-  transition: 'background 0.2s',
+  padding: '0.75rem 1rem',
+  gap: '1rem',
+  transition: 'all 0.2s ease',
   width: '100%',
   ':hover': {
-    background: '#333'
+    background: '#1a1a1a',
   },
   ':focus': {
-    background: '#333',
-    outline: 'none'
+    background: '#1a1a1a',
+    outline: 'none',
   }
 }]);
 
 export const searchItemImage = style({
-  width: '40px',
-  height: '40px',
-  border: '1px solid #444'
+  width: '50px',
+  height: '50px',
+  backgroundColor: '#000'
 });
 
 export const searchItemInfo = style({
@@ -249,23 +248,33 @@ export const searchItemInfo = style({
 });
 
 export const searchItemName = style({
-  fontSize: '0.9rem',
-  fontWeight: 'bold'
+  fontSize: '1rem',
+  fontWeight: 700,
+  fontFamily: vars.font.heading,
+  textTransform: 'uppercase',
+  letterSpacing: '0.02em'
 });
 
 export const searchItemCharacter = style({
-  fontSize: '0.75rem',
+  fontSize: '0.8rem',
   color: vars.color.textMuted
 });
 
 export const noResults = style({
-  padding: vars.space.lg,
+  padding: '3rem',
   textAlign: 'center',
-  color: vars.color.textMuted
+  color: '#444',
+  fontFamily: vars.font.heading,
+  textTransform: 'uppercase',
+  letterSpacing: '0.1em'
 });
 
 export const disabledIcon = style({
-  opacity: 0.5,
+  opacity: 0.3,
   cursor: 'not-allowed',
-  ':hover': { color: vars.color.textMuted }
+  filter: 'grayscale(100%)',
+  ':hover': { 
+    color: '#666',
+    backgroundColor: 'transparent'
+  }
 });

@@ -240,7 +240,7 @@ onMounted(() => {
   height: 100vh;
   z-index: -1;
   pointer-events: none;
-  background: '#000';
+  background: #000;
 }
 
 canvas {

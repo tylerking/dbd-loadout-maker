@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, watch } from 'vue';
 import type { Perk, PerkCategory, Side } from '../../../data/perks';
 import Description from '../Description/Description.vue';
 import Icon from '../Icon/Icon.vue';
@@ -8,14 +8,21 @@ import * as styles from './Perk.css.ts';
 const props = defineProps<{
   perks: Perk[];
   side: Side;
+  globalFilter: string;
 }>();
 
 const chosenPerk = ref<Perk | null>(null);
-const filter = ref<string>('Any');
+const filter = ref<string>(props.globalFilter);
 const isLocked = ref(false);
 const showSearch = ref(false);
 const searchQuery = ref('');
 const showPopover = ref(false);
+
+watch(() => props.globalFilter, (newVal) => {
+  if (!isLocked.value) {
+    filter.value = newVal;
+  }
+});
 
 const availableCategories = computed(() => {
   const cats = new Set<string>();
@@ -55,7 +62,7 @@ const randomPerk = () => {
 const resetPerk = () => {
   if (isLocked.value) return;
   chosenPerk.value = null;
-  filter.value = 'Any';
+  filter.value = props.globalFilter;
   isLocked.value = false;
   showSearch.value = false;
 };
@@ -98,7 +105,7 @@ defineExpose({
       </template>
       <template v-else>
         <div :class="styles.placeholder">
-          <Icon name="plus" :size="32" color="#333" />
+          <Icon name="plus" :size="32" color="#fff" />
         </div>
       </template>
       
@@ -126,7 +133,7 @@ defineExpose({
           @click.stop="toggleSearch"
           aria-label="Close search"
         >
-          <Icon name="x" :size="20" />
+          <Icon name="x" :size="24" />
         </button>
       </div>
       <div :class="styles.searchList">
@@ -157,7 +164,7 @@ defineExpose({
         @click="randomPerk"
         :disabled="isLocked"
       >
-        <Icon name="shuffle" :size="18" />
+        <Icon name="shuffle" :size="24" />
       </button>
       <button
         type="button"
@@ -166,7 +173,7 @@ defineExpose({
         @click="resetPerk"
         :disabled="isLocked"
       >
-        <Icon name="rotate-ccw" :size="18" />
+        <Icon name="rotate-ccw" :size="24" />
       </button>
       <button
         type="button"
@@ -174,7 +181,7 @@ defineExpose({
         :title="isLocked ? 'Unlock' : 'Lock'"
         @click="toggleLock"
       >
-        <Icon :name="isLocked ? 'lock' : 'unlock'" :size="18" />
+        <Icon :name="isLocked ? 'lock' : 'unlock'" :size="24" />
       </button>
     </div>
 

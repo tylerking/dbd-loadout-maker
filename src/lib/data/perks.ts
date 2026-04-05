@@ -11,7 +11,7 @@ export type PerkCategory =
   | 'Evasion' 
   | 'Stealth'
   | 'Haste'
-  | 'Gen Speed'
+  | 'Repair'
   | 'Protection'
   | 'Altruism'
   | 'Luck';
@@ -115,7 +115,7 @@ export const killerPerks: Perk[] = [
     name: 'Brutal Strength',
     description: "Your great strength allows you to shred through your prey's defences. Destroy dropped Pallets and damage Generators 10/15/20% faster.",
     character: 'Trapper',
-    categories: ['Chase', 'Gen Speed'],
+    categories: ['Chase', 'Repair'],
     side: 'Killer',
     imageUrl: '/img/killer-perks/brutal-strength.png'
   },
@@ -187,7 +187,7 @@ export const killerPerks: Perk[] = [
     name: 'Dying Light',
     description: 'You become obsessed with one Survivor. Your Obsession gains a 33% Action Speed bonus to unhooking and healing other Survivors. Each time you hook a Survivor that is not the Obsession and the Obsession is alive, gain a Token. If the Obsession is alive, all others Survivors get a stack-able 2/2.5/3% penalty to Repair, Healing, and Sabotage speed for each Token.',
     character: 'Shape',
-    categories: ['Penalty', 'Gen Speed'],
+    categories: ['Penalty', 'Repair'],
     side: 'Killer',
     imageUrl: '/img/killer-perks/dying-light.png'
   },
@@ -205,7 +205,7 @@ export const killerPerks: Perk[] = [
     name: 'Fire Up',
     description: 'The increased pressure of losing your preys fills you with anger and gives you unsuspected motivation. Each time the Survivors complete repairs on a Generator, Fire Up grows in power. For each Generator completed, gain a stack-able 3/3.5/4% buff to Picking-Up, Dropping, Pallet Breaking, Generator Damaging and Vaulting speeds for the remainder of the Trial.',
     character: 'Nightmare',
-    categories: ['Chase', 'Gen Speed'],
+    categories: ['Chase', 'Repair'],
     side: 'Killer',
     imageUrl: '/img/killer-perks/fire-up.png'
   },
@@ -277,7 +277,7 @@ export const killerPerks: Perk[] = [
     name: 'Hex: Ruin',
     description: 'A Hex that affects all Survivor\'s Generator Repair progress. Whenever a Generator is not being repaired by a Survivor, it will immediately and automatically regress its Repair progress at 100/150/200% of the normal Regression speed.',
     character: 'Hag',
-    categories: ['Penalty', 'Gen Speed'],
+    categories: ['Penalty', 'Repair'],
     side: 'Killer',
     imageUrl: '/img/killer-perks/hex-ruin.png'
   },
@@ -421,7 +421,7 @@ export const killerPerks: Perk[] = [
     name: 'Overcharge',
     description: 'You are fuelled by your hate for progress. Overcharge a Generator by performing the Damage Generator action. The next Survivor interacting with that Generator is faced with a tremendously difficult Skill Check. Failing the Skill Check results in an additional 3/4/5% Regression penalty. Succeeding the Skill Check grants no progress, but prevents the Generator Explosion.',
     character: 'Doctor',
-    categories: ['Penalty', 'Gen Speed'],
+    categories: ['Penalty', 'Repair'],
     side: 'Killer',
     imageUrl: '/img/killer-perks/overcharge.png'
   },
@@ -448,7 +448,7 @@ export const killerPerks: Perk[] = [
     name: 'Pop Goes The Weasel',
     description: 'A deep bond with The Entity unlocks great strength. After hooking a Survivor, the next Generator you break is instantly regressed by 25% of its total progression. Normal Generator Regression applies after the damage is done. Pop Goes the Weasel is active for 40/50/60 seconds after the Survivor is hooked.',
     character: 'Clown',
-    categories: ['Penalty', 'Gen Speed'],
+    categories: ['Penalty', 'Repair'],
     side: 'Killer',
     imageUrl: '/img/killer-perks/pop-goes-the-weasel.png'
   },
@@ -538,7 +538,7 @@ export const killerPerks: Perk[] = [
     name: 'Surge',
     description: 'Your eerie presence charges the air and interferes with technology. Putting a Survivor into the Dying State with a Basic Attack causes all Generators within a radius of 32 metres to instantly explode and regress. Surge applies an immediate Regression penalty of 8%. Surge can only be triggered once every 60/50/40 seconds.',
     character: 'Demogorgon',
-    categories: ['Penalty', 'Gen Speed'],
+    categories: ['Penalty', 'Repair'],
     side: 'Killer',
     imageUrl: '/img/killer-perks/surge.png'
   },
@@ -547,7 +547,7 @@ export const killerPerks: Perk[] = [
     name: 'Surveillance',
     description: "Unlocks potential in one's Aura-reading ability. All regressing Generators will be highlighted by a white Aura. Once regression ends, Generators will be highlighted by a yellow Aura for 8/12/16 seconds. Noises created by Generator Repairs are audible at an additional 8 metres.",
     character: 'Pig',
-    categories: ['Aura', 'Gen Speed'],
+    categories: ['Aura', 'Repair'],
     side: 'Killer',
     imageUrl: '/img/killer-perks/surveillance.png'
   },
@@ -565,7 +565,7 @@ export const killerPerks: Perk[] = [
     name: 'Thanatophobia',
     description: 'Their courage fades in the face of their undeniable mortality. For each Injured, Dying or hooked Survivor, all Survivors receive a stack-able penalty of 3/3.5/4% to their Repair, Healing and Sabotage speed up to a maximum of 12/14/16%.',
     character: 'Nurse',
-    categories: ['Penalty', 'Gen Speed'],
+    categories: ['Penalty', 'Repair'],
     side: 'Killer',
     imageUrl: '/img/killer-perks/thanatophobia.png'
   },
@@ -646,7 +646,7 @@ export const killerPerks: Perk[] = [
     name: 'Scourge Hook: Pain Resonance',
     description: 'At the start of the Trial, up to 4 Hooks are changed into Scourge Hooks. You see their white Auras. Each time a Survivor is hooked on a Scourge Hook, the Generator with the most progress explodes, instantly losing 9/12/15% progression and will start to regress.',
     character: 'Artist',
-    categories: ['Penalty', 'Gen Speed'],
+    categories: ['Penalty', 'Repair'],
     side: 'Killer',
     imageUrl: '/img/killer-perks/scourge-hook-pain-resonance.png'
   }
@@ -1099,7 +1099,7 @@ export const survivorPerks: Perk[] = [
     name: 'Prove Thyself',
     description: 'Increases Repair speed for all repairing Survivors by 10 % for each other Survivor within a range of 4 metres. Gain 50/75/100 % more Bloodpoints for cooperative Actions. Survivors can only be affected by one Prove Thyself effect at a time.',
     character: 'Dwight Fairfield',
-    categories: ['Objective', 'Gen Speed'],
+    categories: ['Objective', 'Repair'],
     side: 'Survivor',
     imageUrl: '/img/survivor-perks/prove-thyself.png'
   },

@@ -1,16 +1,26 @@
 export default {
   colors: {
-    primary: '#c8102e',
+    primary: '#aa1a18',
     secondary: '#f39c12',
-    danger: '#e74c3c',
+    danger: '#aa1a18',
     success: '#2ecc71',
-    background: '#1a1a1a',
-    surface: '#2c2c2c',
-    text: '#f5f5f5',
+    background: '#0a0a0a',
+    surface: '#1a1a1a',
+    text: '#ffffff',
     textMuted: '#999',
+    grayDark: '#292D2E',
+    grayDeep: '#121212',
     side: {
-      killer: '#c8102e',
-      survivor: '#2f9cd6',
+      killer: {
+        primary: '#aa1a18',
+        secondary: '#991412',
+        dark: '#7C0B0A'
+      },
+      survivor: {
+        primary: '#2e63a1',
+        secondary: '#24558e',
+        dark: '#1D3F66'
+      }
     },
   },
   spacing: {

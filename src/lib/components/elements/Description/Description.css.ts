@@ -4,11 +4,11 @@ import { vars } from '../../../styles/theme.css.ts';
 export const root = style({
   width: '300px',
   backgroundColor: vars.color.surface,
-  borderRadius: vars.space.sm,
   overflow: 'hidden',
   boxShadow: vars.shadow.md,
   color: vars.color.text,
-  zIndex: 100
+  zIndex: 100,
+  border: 'none'
 });
 
 export const header = style({
