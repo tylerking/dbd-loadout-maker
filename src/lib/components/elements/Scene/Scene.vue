@@ -1,5 +1,5 @@
 <template>
-  <div ref="containerRef" class="scene-container">
+  <div ref="containerRef" class="scene-container" aria-hidden="true">
     <canvas ref="canvasRef"></canvas>
   </div>
 </template>

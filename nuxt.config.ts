@@ -19,6 +19,7 @@ export default defineNuxtConfig({
  app: {
    head: {
      title: 'DBD Loadout Maker',
+     htmlAttrs: { lang: 'en' },
      link: [
        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
      ]

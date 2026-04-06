@@ -69,7 +69,10 @@ const takeShot = async () => {
     }
 
     await new Promise(resolve => setTimeout(resolve, 600));
-    
+
+    const perkRoots = captureRef.value.querySelectorAll<HTMLElement>(`.${perkStyles.root}`);
+    perkRoots.forEach(el => { el.style.borderRight = 'none'; });
+
     const options = {
       cacheBust: true,
       pixelRatio: 3,
@@ -78,8 +81,10 @@ const takeShot = async () => {
         if (node.classList) {
           const classes = Array.from(node.classList);
           if (
-            classes.includes(perkStyles.controls) || 
+            classes.includes(perkStyles.controls) ||
+            classes.includes(perkStyles.selectWrapper) ||
             classes.includes(perkStyles.filterSelect) ||
+            classes.includes(perkStyles.selectCaret) ||
             classes.includes(perkStyles.popover)
           ) {
             return false;
@@ -101,8 +106,10 @@ const takeShot = async () => {
       } else {
         throw err;
       }
+    } finally {
+      perkRoots.forEach(el => { el.style.borderRight = ''; });
     }
-    
+
     const link = document.createElement('a');
     link.download = `dbd-${props.type.toLowerCase()}-loadout.png`;
     link.href = dataUrl;

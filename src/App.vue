@@ -45,39 +45,44 @@ const triggerScreenshot = () => {
 
 <template>
   <div :class="[themeClass, styles.app]">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <Scene />
     
-    <main :class="styles.main">
+    <main id="main-content" :class="styles.main">
+      <h1 class="sr-only">DBD Loadout Maker</h1>
       <div :class="[
         styles.loadoutContainer, 
         activeSide === 'Killer' ? styles.killerBg : styles.survivorBg
       ]">
         <div :class="styles.sideIconContainer">
-          <img 
+          <img
             v-if="activeSide === 'Killer'"
-            src="/img/killer.webp" 
-            alt="" 
-            :class="[styles.sideIcon, styles.sideIconLeft]" 
+            src="/img/killer.webp"
+            alt=""
+            role="presentation"
+            :class="[styles.sideIcon, styles.sideIconLeft]"
           />
-          <img 
+          <img
             v-if="activeSide === 'Survivor'"
-            src="/img/survivor.webp" 
-            alt="" 
-            :class="[styles.sideIcon, styles.sideIconRight]" 
+            src="/img/survivor.webp"
+            alt=""
+            role="presentation"
+            :class="[styles.sideIcon, styles.sideIconRight]"
           />
         </div>
 
         <div :class="styles.tabNav">
-          <button 
+          <button
             :class="[
-              styles.toggleButton, 
+              styles.toggleButton,
               styles.killerTab,
               activeSide === 'Killer' && [styles.activeToggle, styles.killerActive]
-            ]" 
+            ]"
             @click="toggleSide('Killer')"
             aria-label="Killer Loadout"
+            :aria-pressed="activeSide === 'Killer'"
           >
-            <img src="/img/killer.webp" alt="Killer" :class="styles.toggleImage" />
+            <img src="/img/killer.webp" alt="" :class="styles.toggleImage" />
             <span :class="styles.tabLabel">Killer</span>
           </button>
 
@@ -87,26 +92,27 @@ const triggerScreenshot = () => {
             @screenshot="triggerScreenshot"
           />
 
-          <button 
+          <button
             :class="[
-              styles.toggleButton, 
+              styles.toggleButton,
               styles.survivorTab,
               activeSide === 'Survivor' && [styles.activeToggle, styles.survivorActive]
-            ]" 
+            ]"
             @click="toggleSide('Survivor')"
             aria-label="Survivor Loadout"
+            :aria-pressed="activeSide === 'Survivor'"
           >
             <span :class="styles.tabLabel">Survivor</span>
-            <img src="/img/survivor.webp" alt="Survivor" :class="styles.toggleImage" />
+            <img src="/img/survivor.webp" alt="" :class="styles.toggleImage" />
           </button>
         </div>
 
         <div :class="styles.tabContent">
-          <section v-show="activeSide === 'Killer'">
+          <section v-show="activeSide === 'Killer'" aria-label="Killer Loadout">
             <Loadout ref="killerLoadout" type="Killer" />
           </section>
 
-          <section v-show="activeSide === 'Survivor'">
+          <section v-show="activeSide === 'Survivor'" aria-label="Survivor Loadout">
             <Loadout ref="survivorLoadout" type="Survivor" />
           </section>
         </div>

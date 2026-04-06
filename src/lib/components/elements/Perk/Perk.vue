@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue';
-import type { Perk, PerkCategory, Side } from '../../../data/perks';
+import { ref, computed, watch, nextTick } from 'vue';
+import type { Perk, Side } from '../../../data/perks';
 import Description from '../Description/Description.vue';
 import Icon from '../Icon/Icon.vue';
 import Tooltip from '../Tooltip/Tooltip.vue';
@@ -18,6 +18,8 @@ const isLocked = ref(false);
 const showSearch = ref(false);
 const searchQuery = ref('');
 const showPopover = ref(false);
+const frameButtonRef = ref<HTMLButtonElement | null>(null);
+const searchInputRef = ref<HTMLInputElement | null>(null);
 
 watch(() => props.globalFilter, (newVal) => {
   if (!isLocked.value) {
@@ -75,12 +77,24 @@ const toggleLock = () => {
 const toggleSearch = () => {
   if (isLocked.value) return;
   showSearch.value = !showSearch.value;
+  if (showSearch.value) {
+    nextTick(() => searchInputRef.value?.focus());
+  } else {
+    nextTick(() => frameButtonRef.value?.focus());
+  }
+};
+
+const closeSearch = () => {
+  showSearch.value = false;
+  searchQuery.value = '';
+  nextTick(() => frameButtonRef.value?.focus());
 };
 
 const selectPerk = (perk: Perk) => {
   chosenPerk.value = perk;
   showSearch.value = false;
   searchQuery.value = '';
+  nextTick(() => frameButtonRef.value?.focus());
 };
 
 const handleImageError = (event: Event) => {
@@ -97,38 +111,48 @@ defineExpose({
 
 <template>
   <div :class="styles.root">
-    <div v-if="showSearch" :class="styles.inlineSearch">
+    <div v-if="showSearch" :class="styles.inlineSearch" role="search" aria-label="Search perks">
       <div :class="styles.searchHeader">
-        <input 
-          v-model="searchQuery" 
-          placeholder="Search perks..." 
+        <input
+          ref="searchInputRef"
+          v-model="searchQuery"
+          placeholder="Search perks..."
           :class="styles.searchInput"
           @click.stop
-          autofocus
+          @keydown.escape="closeSearch"
+          aria-label="Search perks by name or character"
         />
         <button
           type="button"
           :class="styles.closeIcon"
-          @click.stop="toggleSearch"
+          @click.stop="closeSearch"
           aria-label="Close search"
         >
           <Icon name="x" :size="20" />
         </button>
       </div>
-      <div :class="styles.searchList">
+      <div
+        :class="styles.searchList"
+        role="listbox"
+        :aria-label="`${filteredPerks.length} perk${filteredPerks.length !== 1 ? 's' : ''} found`"
+        aria-live="polite"
+        aria-atomic="false"
+      >
         <button
-          v-for="perk in filteredPerks" 
-          :key="perk.id" 
+          v-for="perk in filteredPerks"
+          :key="perk.id"
           :class="styles.searchItem"
           @click.stop="selectPerk(perk)"
           type="button"
+          role="option"
+          :aria-selected="chosenPerk?.id === perk.id"
         >
-          <img 
-            :src="perk.imageUrl" 
-            :alt="perk.name" 
-            :class="styles.searchItemImage" 
+          <img
+            :src="perk.imageUrl"
+            :alt="perk.name"
+            :class="styles.searchItemImage"
             @error="handleImageError"
-            loading="lazy" 
+            loading="lazy"
           />
           <div :class="styles.searchItemInfo">
             <div :class="styles.searchItemName">{{ perk.name }}</div>
@@ -143,6 +167,7 @@ defineExpose({
 
     <template v-else>
       <button
+        ref="frameButtonRef"
         type="button"
         :class="styles.frame"
         @click="toggleSearch"
@@ -150,7 +175,7 @@ defineExpose({
         @mouseleave="showPopover = false"
         @focus="showPopover = true"
         @blur="showPopover = false"
-        aria-label="Select Perk"
+        :aria-label="chosenPerk ? `${chosenPerk.name} — ${chosenPerk.character} perk. Press to change.` : 'Empty perk slot. Press to select.'"
       >
         <template v-if="chosenPerk">
           <img 
@@ -167,9 +192,6 @@ defineExpose({
           </div>
         </template>
         
-        <div v-if="isLocked" :class="styles.lockOverlay">
-          <Icon name="lock" :size="32" color="currentColor" />
-        </div>
       </button>
 
       <div 
@@ -219,7 +241,7 @@ defineExpose({
       </div>
 
       <div :class="styles.selectWrapper">
-        <select v-model="filter" :class="styles.filterSelect" :disabled="isLocked">
+        <select v-model="filter" :class="styles.filterSelect" :disabled="isLocked" aria-label="Filter perks by category">
           <option value="Any">Add Category</option>
           <option v-for="cat in availableCategories" :key="cat" :value="cat">{{ cat }}</option>
         </select>

@@ -15,7 +15,7 @@ export const instructionsTitle = style({
   fontFamily: vars.font.heading,
   textTransform: 'uppercase',
   marginBottom: vars.space.md,
-  color: vars.color.side.killer.primary,
+  color: vars.color.text,
   letterSpacing: '1px'
 });
 

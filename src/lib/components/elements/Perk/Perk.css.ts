@@ -65,6 +65,10 @@ export const frame = style([baseButton, {
   },
   ':focus': {
     outline: 'none',
+  },
+  ':focus-visible': {
+    outline: 'none',
+    boxShadow: '0 0 0 3px rgba(255, 255, 255, 0.85)',
   }
 }]);
 
@@ -74,6 +78,11 @@ export const image = style({
   objectFit: 'cover',
   transform: 'rotate(-45deg)',
   animation: `${jackInTheBox} 0.5s ease-out`,
+  '@media': {
+    '(prefers-reduced-motion: reduce)': {
+      animation: 'none',
+    }
+  },
   zIndex: 1,
   selectors: {
     '&[data-missing="true"]': {
@@ -159,6 +168,10 @@ export const filterSelect = style({
   },
   ':focus': {
     outline: 'none',
+  },
+  ':focus-visible': {
+    outline: '2px solid rgba(255, 255, 255, 0.85)',
+    outlineOffset: '2px',
   }
 });
 
@@ -229,7 +242,7 @@ export const searchInput = style({
 });
 
 export const closeIcon = style([baseButton, {
-  color: '#555',
+  color: '#888',
   transition: 'color 0.2s',
   display: 'flex',
   alignItems: 'center',
@@ -312,7 +325,7 @@ export const searchItemCharacter = style({
 export const noResults = style({
   padding: '2rem',
   textAlign: 'center',
-  color: '#444',
+  color: '#888',
   fontSize: '0.8rem',
   textTransform: 'uppercase',
   letterSpacing: '0.1em'

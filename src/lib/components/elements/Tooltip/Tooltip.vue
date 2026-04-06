@@ -18,7 +18,7 @@ const isVisible = ref(false);
     @focusout="isVisible = false"
   >
     <slot />
-    <div v-if="isVisible" :class="styles.tooltip">
+    <div v-if="isVisible" role="tooltip" :class="styles.tooltip">
       {{ text }}
     </div>
   </div>
