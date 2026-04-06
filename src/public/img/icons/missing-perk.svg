@@ -1,0 +1,23 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+  <g fill="none" stroke="white" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Question Mark Main Path -->
+    <path d="M35 35 C 35 15, 65 15, 65 35 C 65 48, 50 52, 50 62" />
+    <!-- Bottom Dot -->
+    <circle cx="50" cy="82" r="5" fill="white" stroke="none" />
+    
+    <!-- Grunge / Scratches -->
+    <g stroke-width="1.5" opacity="0.6">
+      <path d="M20 20 L 28 28 M 80 80 L 72 72 M 20 80 L 28 72 M 80 20 L 72 28" />
+      <path d="M10 50 L 18 50 M 90 50 L 82 50 M 50 10 L 50 18 M 50 90 L 50 82" />
+      <path d="M30 15 L 35 22 M 70 15 L 65 22 M 30 85 L 35 78 M 70 85 L 65 78" />
+    </g>
+    
+    <!-- Subtle Noise/Dots -->
+    <g fill="white" stroke="none" opacity="0.4">
+      <circle cx="15" cy="35" r="1" />
+      <circle cx="85" cy="65" r="1.2" />
+      <circle cx="25" cy="75" r="0.8" />
+      <circle cx="75" cy="25" r="1" />
+    </g>
+  </g>
+</svg>

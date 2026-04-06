@@ -3,6 +3,7 @@ import { ref, computed, watch } from 'vue';
 import type { Perk, PerkCategory, Side } from '../../../data/perks';
 import Description from '../Description/Description.vue';
 import Icon from '../Icon/Icon.vue';
+import Tooltip from '../Tooltip/Tooltip.vue';
 import * as styles from './Perk.css.ts';
 
 const props = defineProps<{
@@ -82,6 +83,12 @@ const selectPerk = (perk: Perk) => {
   searchQuery.value = '';
 };
 
+const handleImageError = (event: Event) => {
+  const target = event.target as HTMLImageElement;
+  target.src = '/img/icons/missing-perk.svg';
+  target.setAttribute('data-missing', 'true');
+};
+
 defineExpose({
   randomPerk,
   resetPerk
@@ -90,35 +97,7 @@ defineExpose({
 
 <template>
   <div :class="styles.root">
-    <button
-      type="button"
-      :class="styles.frame"
-      @click="toggleSearch"
-      @mouseenter="showPopover = true"
-      @mouseleave="showPopover = false"
-      @focus="showPopover = true"
-      @blur="showPopover = false"
-      aria-label="Select Perk"
-    >
-      <template v-if="chosenPerk">
-        <img :src="chosenPerk.imageUrl" :alt="chosenPerk.name" :class="styles.image" loading="lazy" />
-      </template>
-      <template v-else>
-        <div :class="styles.placeholder">
-          <Icon name="plus" :size="32" color="#fff" />
-        </div>
-      </template>
-      
-      <div v-if="isLocked" :class="styles.lockOverlay">
-        <Icon name="lock" :size="32" color="currentColor" />
-      </div>
-    </button>
-
-    <div v-if="chosenPerk && !showSearch && showPopover" :class="styles.popover">
-      <Description :perk="chosenPerk" />
-    </div>
-
-    <div v-if="showSearch" :class="styles.searchModal">
+    <div v-if="showSearch" :class="styles.inlineSearch">
       <div :class="styles.searchHeader">
         <input 
           v-model="searchQuery" 
@@ -133,7 +112,7 @@ defineExpose({
           @click.stop="toggleSearch"
           aria-label="Close search"
         >
-          <Icon name="x" :size="24" />
+          <Icon name="x" :size="20" />
         </button>
       </div>
       <div :class="styles.searchList">
@@ -144,50 +123,110 @@ defineExpose({
           @click.stop="selectPerk(perk)"
           type="button"
         >
-          <img :src="perk.imageUrl" :alt="perk.name" :class="styles.searchItemImage" loading="lazy" />
+          <img 
+            :src="perk.imageUrl" 
+            :alt="perk.name" 
+            :class="styles.searchItemImage" 
+            @error="handleImageError"
+            loading="lazy" 
+          />
           <div :class="styles.searchItemInfo">
             <div :class="styles.searchItemName">{{ perk.name }}</div>
             <div :class="styles.searchItemCharacter">{{ perk.character }}</div>
           </div>
         </button>
         <div v-if="filteredPerks.length === 0" :class="styles.noResults">
-          No perks found
+          No results
         </div>
       </div>
     </div>
 
-    <div :class="styles.controls">
+    <template v-else>
       <button
         type="button"
-        :class="[styles.icon, isLocked && styles.disabledIcon]"
-        title="Randomize"
-        @click="randomPerk"
-        :disabled="isLocked"
+        :class="styles.frame"
+        @click="toggleSearch"
+        @mouseenter="showPopover = true"
+        @mouseleave="showPopover = false"
+        @focus="showPopover = true"
+        @blur="showPopover = false"
+        aria-label="Select Perk"
       >
-        <Icon name="shuffle" :size="24" />
+        <template v-if="chosenPerk">
+          <img 
+            :src="chosenPerk.imageUrl" 
+            :alt="chosenPerk.name" 
+            :class="styles.image" 
+            @error="handleImageError"
+            loading="lazy" 
+          />
+        </template>
+        <template v-else>
+          <div :class="styles.placeholder">
+            <Icon name="plus" :size="32" color="#fff" />
+          </div>
+        </template>
+        
+        <div v-if="isLocked" :class="styles.lockOverlay">
+          <Icon name="lock" :size="32" color="currentColor" />
+        </div>
       </button>
-      <button
-        type="button"
-        :class="[styles.icon, isLocked && styles.disabledIcon]"
-        title="Reset"
-        @click="resetPerk"
-        :disabled="isLocked"
-      >
-        <Icon name="rotate-ccw" :size="24" />
-      </button>
-      <button
-        type="button"
-        :class="[styles.icon, isLocked ? styles.lockedIcon : '']"
-        :title="isLocked ? 'Unlock' : 'Lock'"
-        @click="toggleLock"
-      >
-        <Icon :name="isLocked ? 'lock' : 'unlock'" :size="24" />
-      </button>
-    </div>
 
-    <select v-model="filter" :class="styles.filterSelect" :disabled="isLocked">
-      <option value="Any">Any Category</option>
-      <option v-for="cat in availableCategories" :key="cat" :value="cat">{{ cat }}</option>
-    </select>
+      <div 
+        v-if="chosenPerk && showPopover" 
+        :class="styles.popover"
+        @mouseenter="showPopover = true"
+        @mouseleave="showPopover = false"
+      >
+        <Description :perk="chosenPerk" />
+      </div>
+
+      <div :class="styles.controls">
+        <Tooltip text="Randomize Perk">
+          <button
+            type="button"
+            :class="[styles.icon, isLocked && styles.disabledIcon]"
+            @click="randomPerk"
+            :disabled="isLocked"
+            aria-label="Randomize"
+          >
+            <Icon name="shuffle" :size="20" />
+          </button>
+        </Tooltip>
+
+        <Tooltip text="Reset Perk">
+          <button
+            type="button"
+            :class="[styles.icon, isLocked && styles.disabledIcon]"
+            @click="resetPerk"
+            :disabled="isLocked"
+            aria-label="Reset"
+          >
+            <Icon name="rotate-ccw" :size="20" />
+          </button>
+        </Tooltip>
+
+        <Tooltip :text="isLocked ? 'Unlock Perk' : 'Lock Perk'">
+          <button
+            type="button"
+            :class="[styles.icon, isLocked ? styles.lockedIcon : '']"
+            @click="toggleLock"
+            aria-label="Toggle Lock"
+          >
+            <Icon :name="isLocked ? 'lock' : 'unlock'" :size="20" />
+          </button>
+        </Tooltip>
+      </div>
+
+      <div :class="styles.selectWrapper">
+        <select v-model="filter" :class="styles.filterSelect" :disabled="isLocked">
+          <option value="Any">Add Category</option>
+          <option v-for="cat in availableCategories" :key="cat" :value="cat">{{ cat }}</option>
+        </select>
+        <div :class="styles.selectCaret">
+          <Icon name="chevron-down" :size="12" />
+        </div>
+      </div>
+    </template>
   </div>
 </template>

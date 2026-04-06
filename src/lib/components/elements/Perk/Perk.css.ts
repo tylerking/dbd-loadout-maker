@@ -14,7 +14,6 @@ const baseButton = style({
   padding: 0,
   margin: 0,
   cursor: 'pointer',
-  fontFamily: 'inherit',
   color: 'inherit',
   textAlign: 'left'
 });
@@ -24,8 +23,14 @@ export const root = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  gap: '1.5rem',
+  justifyContent: 'flex-start',
   width: '100%',
+  padding: '3rem 0',
+  borderRight: '1px solid rgba(255, 255, 255, 0.05)',
+  overflow: 'visible',
+  ':last-child': {
+    borderRight: 'none'
+  }
 });
 
 export const frame = style([baseButton, {
@@ -39,6 +44,7 @@ export const frame = style([baseButton, {
   justifyContent: 'center',
   alignItems: 'center',
   backgroundColor: 'rgba(0, 0, 0, 0.05)',
+  marginBottom: '2.5rem',
   backgroundImage: `
     linear-gradient(to right, #fff 12px, transparent 12px),
     linear-gradient(to bottom, #fff 12px, transparent 12px),
@@ -68,7 +74,12 @@ export const image = style({
   objectFit: 'cover',
   transform: 'rotate(-45deg)',
   animation: `${jackInTheBox} 0.5s ease-out`,
-  zIndex: 1
+  zIndex: 1,
+  selectors: {
+    '&[data-missing="true"]': {
+      opacity: 0.8
+    }
+  }
 });
 
 export const placeholder = style({
@@ -83,70 +94,83 @@ export const placeholder = style({
 
 export const popover = style({
   position: 'absolute',
-  top: '-10px',
-  left: '125%',
+  top: '140px',
+  left: '50%',
+  transform: 'translateX(-50%)',
   zIndex: 1000,
-  pointerEvents: 'none',
-  '@media': {
-    'screen and (max-width: 1024px)': {
-      left: 'auto',
-      right: '125%',
-    },
-    'screen and (max-width: 768px)': {
-      left: '50%',
-      right: 'auto',
-      transform: 'translateX(-50%)',
-      top: '125%',
-    }
-  }
+  pointerEvents: 'auto',
+  width: 'max-content',
+  maxWidth: '300px'
 });
 
 export const controls = style({
   display: 'flex',
   gap: '1rem',
-  marginTop: '0.5rem'
+  marginBottom: '0.5rem'
 });
 
 export const icon = style([baseButton, {
-  color: '#666',
+  color: '#fff',
   fontSize: '20px',
   transition: 'all 0.2s ease',
-  padding: '6px',
-  backgroundColor: 'rgba(255,255,255,0.03)',
+  padding: '8px',
+  borderRadius: '4px',
+  backgroundColor: 'transparent',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
   ':hover': {
-    color: vars.color.text,
     backgroundColor: 'rgba(255,255,255,0.1)'
   }
 }]);
 
 export const lockedIcon = style({
-  color: vars.color.side.killer.primary,
-  backgroundColor: 'rgba(170, 26, 24, 0.1)'
+  color: '#fff',
+  backgroundColor: 'rgba(255,255,255,0.15)'
+});
+
+export const selectWrapper = style({
+  position: 'relative',
+  display: 'inline-flex',
+  alignItems: 'center',
+  width: 'auto',
+  margin: '0 auto'
 });
 
 export const filterSelect = style({
-  background: '#111',
-  color: '#888',
+  background: 'transparent',
+  color: '#fff',
   border: 'none',
-  padding: '8px 12px',
+  padding: '8px 32px 8px 12px',
   fontSize: '0.8rem',
-  fontFamily: vars.font.heading,
-  width: '160px',
-  margin: '0 auto',
+  fontFamily: 'inherit',
   cursor: 'pointer',
   transition: 'all 0.2s ease',
   textTransform: 'uppercase',
   letterSpacing: '0.05em',
   appearance: 'none',
   textAlign: 'center',
+  width: 'auto',
+  minWidth: '160px',
+  zIndex: 2,
+  position: 'relative',
   ':hover': {
-    color: '#aaa',
-    backgroundColor: '#181818'
+    opacity: 0.8
   },
   ':focus': {
     outline: 'none',
-    color: vars.color.text
   }
+});
+
+export const selectCaret = style({
+  position: 'absolute',
+  right: '8px',
+  pointerEvents: 'none',
+  display: 'flex',
+  alignItems: 'center',
+  color: '#fff',
+  opacity: 0.6,
+  zIndex: 1
 });
 
 export const lockOverlay = style({
@@ -159,112 +183,137 @@ export const lockOverlay = style({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',
-  color: vars.color.side.killer.primary,
+  color: '#fff',
   zIndex: 10,
   pointerEvents: 'none',
   transform: 'rotate(-45deg)'
 });
 
-export const searchModal = style({
-  position: 'fixed',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: '90vw',
-  maxWidth: '500px',
-  maxHeight: '80vh',
-  background: '#121212',
-  boxShadow: '0 20px 50px rgba(0,0,0,0.9)',
-  zIndex: 2000,
+export const inlineSearch = style({
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  background: vars.color.grayDeep,
+  zIndex: 10,
   display: 'flex',
   flexDirection: 'column',
-  animation: `${jackInTheBox} 0.3s ease-out`,
-  fontFamily: vars.font.body,
-  border: 'none'
+  overflow: 'hidden'
 });
 
 export const searchHeader = style({
-  padding: '1.5rem',
+  padding: '1.5rem 1rem 0.5rem',
   display: 'flex',
   alignItems: 'center',
-  gap: '1rem',
-  backgroundColor: '#181818'
+  gap: '0.75rem',
+  backgroundColor: 'transparent',
+  borderBottom: 'none',
+  flexShrink: 0
 });
 
 export const searchInput = style({
   flex: 1,
-  background: '#0a0a0a',
+  background: 'transparent',
   border: 'none',
+  borderBottom: '1px solid rgba(255, 255, 255, 0.3)',
   color: vars.color.text,
-  padding: '0.8rem 1rem',
-  fontSize: '1rem',
-  fontFamily: vars.font.body,
+  padding: '0.5rem 0',
+  fontSize: '0.9rem',
+  fontFamily: 'inherit',
+  borderRadius: 0,
   ':focus': {
-    outline: 'none'
+    outline: 'none',
+    borderBottomColor: '#fff'
   }
 });
 
 export const closeIcon = style([baseButton, {
   color: '#555',
   transition: 'color 0.2s',
-  ':hover': { color: vars.color.side.killer.primary }
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  ':hover': { color: '#fff' }
 }]);
 
 export const searchList = style({
   flex: 1,
   overflowY: 'auto',
-  padding: '1rem',
+  padding: '0.5rem',
   display: 'flex',
   flexDirection: 'column',
-  gap: '4px',
-  backgroundColor: '#121212'
+  gap: '2px',
+  '::-webkit-scrollbar': {
+    width: '4px'
+  },
+  '::-webkit-scrollbar-track': {
+    background: 'transparent'
+  },
+  '::-webkit-scrollbar-thumb': {
+    background: 'rgba(255,255,255,0.1)',
+    borderRadius: '2px'
+  }
 });
 
 export const searchItem = style([baseButton, {
   display: 'flex',
   alignItems: 'center',
-  padding: '0.75rem 1rem',
-  gap: '1rem',
+  padding: '0.5rem 0.75rem',
+  gap: '0.75rem',
   transition: 'all 0.2s ease',
   width: '100%',
   ':hover': {
-    background: '#1a1a1a',
+    background: 'rgba(255,255,255,0.05)',
   },
   ':focus': {
-    background: '#1a1a1a',
+    background: 'rgba(255,255,255,0.05)',
     outline: 'none',
   }
 }]);
 
 export const searchItemImage = style({
-  width: '50px',
-  height: '50px',
-  backgroundColor: '#000'
+  width: '32px',
+  height: '32px',
+  backgroundColor: '#000',
+  objectFit: 'contain',
+  selectors: {
+    '&[data-missing="true"]': {
+      opacity: 0.8
+    }
+  }
 });
 
 export const searchItemInfo = style({
   display: 'flex',
-  flexDirection: 'column'
+  flexDirection: 'column',
+  minWidth: 0
 });
 
 export const searchItemName = style({
-  fontSize: '1rem',
+  fontSize: '0.85rem',
   fontWeight: 700,
   fontFamily: vars.font.heading,
   textTransform: 'uppercase',
-  letterSpacing: '0.02em'
+  letterSpacing: '0.02em',
+  whiteSpace: 'nowrap',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis'
 });
 
 export const searchItemCharacter = style({
-  fontSize: '0.8rem',
-  color: vars.color.textMuted
+  fontSize: '0.7rem',
+  color: vars.color.textMuted,
+  whiteSpace: 'nowrap',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis'
 });
 
 export const noResults = style({
-  padding: '3rem',
+  padding: '2rem',
   textAlign: 'center',
   color: '#444',
-  fontFamily: vars.font.heading,
+  fontSize: '0.8rem',
   textTransform: 'uppercase',
   letterSpacing: '0.1em'
 });
@@ -274,7 +323,7 @@ export const disabledIcon = style({
   cursor: 'not-allowed',
   filter: 'grayscale(100%)',
   ':hover': { 
-    color: '#666',
+    color: '#fff',
     backgroundColor: 'transparent'
   }
 });

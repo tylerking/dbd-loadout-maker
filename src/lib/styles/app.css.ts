@@ -6,7 +6,8 @@ export const app = style({
   display: 'flex',
   flexDirection: 'column',
   backgroundColor: vars.color.background,
-  color: vars.color.text
+  color: vars.color.text,
+  fontFamily: vars.font.body
 });
 
 export const main = style({
@@ -26,7 +27,7 @@ export const main = style({
 });
 
 export const loadoutContainer = style({
-  overflow: 'hidden',
+  overflow: 'visible',
   boxShadow: '0 20px 50px rgba(0,0,0,0.5)',
   display: 'flex',
   flexDirection: 'column',
@@ -60,10 +61,6 @@ const baseButton = style({
   transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
   position: 'relative',
   color: 'rgba(255, 255, 255, 0.4)',
-  ':hover': {
-    textDecoration: 'underline',
-    color: 'rgba(255, 255, 255, 0.8)'
-  },
   '@media': {
     'screen and (min-width: 768px)': {
       padding: '1.5rem 3rem',
@@ -99,9 +96,6 @@ export const survivorTab = style({
 
 export const activeToggle = style({
   color: '#fff',
-  ':hover': {
-    color: '#fff'
-  }
 });
 
 export const killerActive = style({
@@ -149,6 +143,28 @@ export const tabLabel = style({
   letterSpacing: '2px',
   zIndex: 1,
   textShadow: '0 4px 8px rgba(0,0,0,0.8)',
+  position: 'relative',
+  paddingBottom: '8px',
+  ':after': {
+    content: "''",
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    width: '100%',
+    height: '3px',
+    backgroundColor: '#fff',
+    transform: 'scaleX(0) skewX(-30deg)',
+    transition: 'transform 0.2s ease',
+    transformOrigin: 'bottom center'
+  },
+  selectors: {
+    [`${toggleButton}:hover &:after, ${activeToggle} &:after`]: {
+      transform: 'scaleX(1) skewX(-30deg)'
+    },
+    [`${toggleButton}:hover &, ${activeToggle} &`]: {
+      color: '#fff'
+    }
+  },
   '@media': {
     'screen and (min-width: 768px)': {
       display: 'block'
@@ -157,15 +173,20 @@ export const tabLabel = style({
 });
 
 export const tabContent = style({
-  padding: '1rem 0.5rem',
-  minHeight: '400px',
   position: 'relative',
   zIndex: 2,
-  '@media': {
-    'screen and (min-width: 768px)': {
-      padding: '1.5rem 1rem',
-    }
-  }
+  overflow: 'visible'
+});
+
+export const sideIconContainer = style({
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  overflow: 'hidden',
+  pointerEvents: 'none',
+  zIndex: 1
 });
 
 export const sideIcon = style({
@@ -174,8 +195,6 @@ export const sideIcon = style({
   width: '240px',
   height: 'auto',
   opacity: 0.04,
-  pointerEvents: 'none',
-  zIndex: 1,
   filter: 'brightness(0) invert(1)',
   '@media': {
     'screen and (min-width: 768px)': {

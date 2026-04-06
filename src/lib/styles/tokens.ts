@@ -31,8 +31,8 @@ export default {
     xl: '32px'
   },
   fonts: {
-    heading: "'Roboto Condensed', sans-serif",
-    body: "'Roboto', sans-serif"
+    heading: "Roboto Condensed, sans-serif",
+    body: "Roboto, sans-serif"
   },
   shadows: {
     sm: '0 2px 4px rgba(0,0,0,0.1)',

@@ -1,23 +1,29 @@
 import { globalStyle } from '@vanilla-extract/css';
-import { vars } from './theme.css.ts';
 
 globalStyle('html, body', {
   margin: 0,
   padding: 0,
-  backgroundColor: vars.color.background,
-  color: vars.color.text,
-  fontFamily: vars.font.body,
+  backgroundColor: '#0a0a0a',
+  color: '#ffffff',
+  fontFamily: 'Roboto, sans-serif',
   minHeight: '100vh'
 });
 
 globalStyle('*', {
-  boxSizing: 'border-box'
+  boxSizing: 'border-box',
+  fontFamily: 'inherit'
+});
+
+globalStyle('button, input, select, textarea, option, optgroup', {
+  fontFamily: 'inherit',
+  fontSize: 'inherit',
+  color: 'inherit'
 });
 
 globalStyle('h1, h2, h3, h4, h5, h6', {
   margin: 0,
-  color: vars.color.primary,
-  fontFamily: vars.font.heading
+  color: '#aa1a18',
+  fontFamily: 'Roboto Condensed, sans-serif'
 });
 
 globalStyle('a', {

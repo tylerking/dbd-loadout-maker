@@ -4,7 +4,6 @@ import { vars } from '../../../styles/theme.css.ts';
 export const footer = style({
   padding: '3rem 2rem',
   textAlign: 'center',
-  marginTop: '4rem',
   color: vars.color.textMuted
 });
 

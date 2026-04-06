@@ -52,18 +52,20 @@ const triggerScreenshot = () => {
         styles.loadoutContainer, 
         activeSide === 'Killer' ? styles.killerBg : styles.survivorBg
       ]">
-        <img 
-          v-if="activeSide === 'Killer'"
-          src="/img/killer.webp" 
-          alt="" 
-          :class="[styles.sideIcon, styles.sideIconLeft]" 
-        />
-        <img 
-          v-if="activeSide === 'Survivor'"
-          src="/img/survivor.webp" 
-          alt="" 
-          :class="[styles.sideIcon, styles.sideIconRight]" 
-        />
+        <div :class="styles.sideIconContainer">
+          <img 
+            v-if="activeSide === 'Killer'"
+            src="/img/killer.webp" 
+            alt="" 
+            :class="[styles.sideIcon, styles.sideIconLeft]" 
+          />
+          <img 
+            v-if="activeSide === 'Survivor'"
+            src="/img/survivor.webp" 
+            alt="" 
+            :class="[styles.sideIcon, styles.sideIconRight]" 
+          />
+        </div>
 
         <div :class="styles.tabNav">
           <button 

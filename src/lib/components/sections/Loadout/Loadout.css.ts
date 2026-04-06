@@ -26,7 +26,6 @@ export const globalFilterSelect = style({
   color: '#fff',
   padding: '6px 12px',
   fontSize: '0.8rem',
-  fontFamily: vars.font.heading,
   width: '180px',
   cursor: 'pointer',
   transition: 'all 0.2s ease',
@@ -71,16 +70,14 @@ export const grid = style({
   display: 'grid',
   gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
   justifyItems: 'center',
-  alignItems: 'start',
-  gap: '2rem',
-  padding: '2rem 1rem',
-  maxWidth: '1200px',
+  alignItems: 'stretch',
+  gap: '0',
+  maxWidth: '100%',
   margin: '0 auto',
   width: '100%',
   '@media': {
     'screen and (min-width: 1024px)': {
       gridTemplateColumns: 'repeat(4, 1fr)',
-      gap: vars.space.xl,
     }
   }
 });

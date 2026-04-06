@@ -2,13 +2,18 @@
 import { computed } from 'vue';
 
 const props = defineProps<{
-  name: 'github' | 'plus' | 'lock' | 'unlock' | 'x' | 'shuffle' | 'rotate-ccw' | 'rotate-cw' | 'refresh-cw' | 'image';
+  name: 'github' | 'plus' | 'lock' | 'unlock' | 'x' | 'shuffle' | 'rotate-ccw' | 'rotate-cw' | 'refresh-cw' | 'image' | 'chevron-down';
   size?: number | string;
   color?: string;
 }>();
 
 const iconSize = computed(() => typeof props.size === 'number' ? `${props.size}px` : props.size || '1em');
 const iconColor = computed(() => props.color || 'currentColor');
+
+const viewBox = computed(() => {
+  if (props.name === 'chevron-down') return '0 0 16 16';
+  return '0 0 24 24';
+});
 </script>
 
 <template>
@@ -16,9 +21,9 @@ const iconColor = computed(() => props.color || 'currentColor');
     xmlns="http://www.w3.org/2000/svg"
     :width="iconSize"
     :height="iconSize"
-    viewBox="0 0 24 24"
+    :viewBox="viewBox"
     fill="none"
-    :stroke="iconColor"
+    :stroke="name === 'chevron-down' ? 'none' : iconColor"
     stroke-width="2"
     stroke-linecap="round"
     stroke-linejoin="round"
@@ -67,6 +72,9 @@ const iconColor = computed(() => props.color || 'currentColor');
       <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
       <circle cx="8.5" cy="8.5" r="1.5"></circle>
       <polyline points="21 15 16 10 5 21"></polyline>
+    </template>
+    <template v-else-if="name === 'chevron-down'">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M14.0607 5.49999L13.5303 6.03032L8.7071 10.8535C8.31658 11.2441 7.68341 11.2441 7.29289 10.8535L2.46966 6.03032L1.93933 5.49999L2.99999 4.43933L3.53032 4.96966L7.99999 9.43933L12.4697 4.96966L13 4.43933L14.0607 5.49999Z" fill="currentColor"></path>
     </template>
   </svg>
 </template>

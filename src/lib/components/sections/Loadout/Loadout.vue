@@ -2,6 +2,7 @@
 import { ref, computed } from 'vue';
 import type { Perk, Side } from '../../../data/perks';
 import PerkComponent from '../../elements/Perk/Perk.vue';
+import * as perkStyles from '../../elements/Perk/Perk.css.ts';
 import * as styles from './Loadout.css.ts';
 
 const props = defineProps<{
@@ -60,17 +61,47 @@ const takeShot = async () => {
     const { toPng } = await import('html-to-image');
     
     if (document.fonts) {
-      await document.fonts.ready;
+      try {
+        await document.fonts.ready;
+      } catch (e) {
+        console.warn('Font loading timed out or failed, continuing anyway');
+      }
     }
 
-    await new Promise(resolve => setTimeout(resolve, 100));
+    await new Promise(resolve => setTimeout(resolve, 600));
     
-    const dataUrl = await toPng(captureRef.value, { 
+    const options = {
       cacheBust: true,
-      pixelRatio: 2,
+      pixelRatio: 3,
       backgroundColor: 'transparent',
-      skipAutoScale: true
-    });
+      filter: (node: any) => {
+        if (node.classList) {
+          const classes = Array.from(node.classList);
+          if (
+            classes.includes(perkStyles.controls) || 
+            classes.includes(perkStyles.filterSelect) ||
+            classes.includes(perkStyles.popover)
+          ) {
+            return false;
+          }
+        }
+        return true;
+      },
+      fontEmbedCSS: '',
+      includeQueryParams: true
+    };
+
+    let dataUrl;
+    try {
+      dataUrl = await toPng(captureRef.value, options);
+    } catch (err: any) {
+      if (err.message?.includes('font') || err.toString().includes('trim')) {
+        console.warn('Screenshot failed with font error, retrying without font embedding...');
+        dataUrl = await toPng(captureRef.value, { ...options, fontEmbedCSS: ' ' });
+      } else {
+        throw err;
+      }
+    }
     
     const link = document.createElement('a');
     link.download = `dbd-${props.type.toLowerCase()}-loadout.png`;

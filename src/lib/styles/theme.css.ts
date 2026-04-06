@@ -1,7 +1,7 @@
 import { createTheme } from '@vanilla-extract/css';
 import tokens from './tokens';
 
-const [themeClass, vars] = createTheme({
+export const [themeClass, vars] = createTheme({
   color: {
     primary: tokens.colors.primary,
     secondary: tokens.colors.secondary,
@@ -34,5 +34,4 @@ const [themeClass, vars] = createTheme({
   shadow: tokens.shadows
 });
 
-export { themeClass, vars };
 export default themeClass;

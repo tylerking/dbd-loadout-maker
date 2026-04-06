@@ -6,7 +6,7 @@ export const centralActions = style({
   flexDirection: 'column',
   justifyContent: 'center',
   padding: '0.25rem 0.5rem',
-  backgroundColor: '#000',
+  backgroundColor: vars.color.grayDeep,
   gap: '0.5rem',
   borderLeft: '1px solid rgba(255, 255, 255, 0.05)',
   borderRight: '1px solid rgba(255, 255, 255, 0.05)',
