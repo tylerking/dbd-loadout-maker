@@ -68,6 +68,12 @@ const takeShot = async () => {
       }
     }
 
+    const images = captureRef.value.querySelectorAll<HTMLElement>(`.${perkStyles.image}`);
+    images.forEach(img => {
+      img.style.animation = 'none';
+      img.style.transition = 'none';
+    });
+
     await new Promise(resolve => setTimeout(resolve, 600));
 
     const perkRoots = captureRef.value.querySelectorAll<HTMLElement>(`.${perkStyles.root}`);
@@ -108,6 +114,11 @@ const takeShot = async () => {
       }
     } finally {
       perkRoots.forEach(el => { el.style.borderRight = ''; });
+
+      images.forEach(img => {
+        img.style.animation = '';
+        img.style.transition = '';
+      });
     }
 
     const link = document.createElement('a');

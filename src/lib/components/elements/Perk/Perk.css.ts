@@ -109,7 +109,32 @@ export const popover = style({
   zIndex: 1000,
   pointerEvents: 'auto',
   width: 'max-content',
-  maxWidth: '300px'
+  maxWidth: '300px',
+  '@media': {
+    'screen and (max-width: 1023px)': {
+      width: 'calc(100vw - 40px)',
+      maxWidth: '300px',
+    }
+  },
+  selectors: {
+    [`${root}:nth-child(odd) &`]: {
+      '@media': {
+        'screen and (max-width: 1023px)': {
+          left: '20px',
+          transform: 'none',
+        }
+      }
+    },
+    [`${root}:nth-child(even) &`]: {
+      '@media': {
+        'screen and (max-width: 1023px)': {
+          left: 'auto',
+          right: '20px',
+          transform: 'none',
+        }
+      }
+    }
+  }
 });
 
 export const controls = style({
@@ -219,14 +244,17 @@ export const searchHeader = style({
   padding: '1.5rem 1rem 0.5rem',
   display: 'flex',
   alignItems: 'center',
-  gap: '0.75rem',
+  gap: '0.5rem',
   backgroundColor: 'transparent',
   borderBottom: 'none',
-  flexShrink: 0
+  flexShrink: 0,
+  width: '100%',
+  boxSizing: 'border-box'
 });
 
 export const searchInput = style({
   flex: 1,
+  minWidth: 0,
   background: 'transparent',
   border: 'none',
   borderBottom: '1px solid rgba(255, 255, 255, 0.3)',
@@ -247,6 +275,9 @@ export const closeIcon = style([baseButton, {
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
+  flexShrink: 0,
+  width: '32px',
+  height: '32px',
   ':hover': { color: '#fff' }
 }]);
 

@@ -191,22 +191,36 @@ export const sideIconContainer = style({
 
 export const sideIcon = style({
   position: 'absolute',
-  top: '30%',
-  width: '240px',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: '280px',
   height: 'auto',
   opacity: 0.04,
   filter: 'brightness(0) invert(1)',
   '@media': {
-    'screen and (min-width: 768px)': {
+    'screen and (min-width: 1024px)': {
+      top: '30%',
+      transform: 'none',
       width: '240px',
     }
   }
 });
 
 export const sideIconLeft = style({
-  left: '-6%',
+  '@media': {
+    'screen and (min-width: 1024px)': {
+      left: '-6%',
+      right: 'auto'
+    }
+  }
 });
 
 export const sideIconRight = style({
-  right: '-6%',
+  '@media': {
+    'screen and (min-width: 1024px)': {
+      right: '-6%',
+      left: 'auto'
+    }
+  }
 });

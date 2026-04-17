@@ -75,7 +75,7 @@ const toggleLock = () => {
 };
 
 const toggleSearch = () => {
-  if (isLocked.value) return;
+  if (isLocked.value || chosenPerk.value) return;
   showSearch.value = !showSearch.value;
   if (showSearch.value) {
     nextTick(() => searchInputRef.value?.focus());
@@ -175,7 +175,7 @@ defineExpose({
         @mouseleave="showPopover = false"
         @focus="showPopover = true"
         @blur="showPopover = false"
-        :aria-label="chosenPerk ? `${chosenPerk.name} — ${chosenPerk.character} perk. Press to change.` : 'Empty perk slot. Press to select.'"
+        :aria-label="chosenPerk ? `${chosenPerk.name} — ${chosenPerk.character} perk. View description.` : 'Empty perk slot. Press to select.'"
       >
         <template v-if="chosenPerk">
           <img 
@@ -183,7 +183,6 @@ defineExpose({
             :alt="chosenPerk.name" 
             :class="styles.image" 
             @error="handleImageError"
-            loading="lazy" 
           />
         </template>
         <template v-else>
